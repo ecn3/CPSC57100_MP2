@@ -1,0 +1,18 @@
+ALPHA BETA
+
+max test:
+take in self, alpha, beta
+
+initalize maxValue less then -1
+
+checkWin to see if X won if Y won or if no one has won
+
+set result to -1,1,0 depending on outcome
+
+go through each postion in the game board
+	check if its taken
+	if not try to make the computers move in that position
+	call min test with that move as the state
+	see if that move is better then the current state
+	if it is set maxvalue to the m
+	then reset the current move
