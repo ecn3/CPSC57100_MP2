@@ -137,15 +137,17 @@ class GenGameBoard:
 
     
     # TODO - this method should run minimax to determine the value of each move
+
     # Then make best move for the computer by placing the mark in the best spot
     def makeCompMove(self):
+
         # This code chooses a random computer move - just for testing purposes
         # REMOVE THIS AFTER IMPLEMENTING AI
         # Make sure the move was possible, if not try again
-        row, col = -1, -1
-        while not self.makeMove(row, col, 'O'):
-            col = random.randint(1,boardSize)
-            row = random.randint(1,boardSize)
+        row, col = -1, -1 # starts with -1 as is not valid so the will not will go at least once
+        while not self.makeMove(row, col, 'O'): # checks that random choice is possible
+            col = random.randint(1,boardSize) # choses random col number
+            row = random.randint(1,boardSize) # choses random row number
         print("Computer chose: "+str(row)+","+str(col))
         
         # Run alpha beta search here
@@ -157,7 +159,7 @@ print("NAME: Christian Nelson")
 
 LOST = 0
 WON = 1
-DRAW = 2    
+DRAW = 2
 wrongInput = False
 boardSize = int(input("Please enter the size of the board n (e.g. n=3,4,5,...): "))
         

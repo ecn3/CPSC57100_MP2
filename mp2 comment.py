@@ -110,7 +110,7 @@ class GenGameBoard:
     def makeCompMove(self):
         # where we put maximizer
         # run alapha beta search
-
+        # Utility of 0 for draw, U of 1 for max and U of -1 for min
         """ 
         function ALPHA-BETA-SEARCH(state) returns an action
             v ←MAX-VALUE(state,−∞,+∞)
