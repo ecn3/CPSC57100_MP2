@@ -140,15 +140,15 @@ class GenGameBoard:
         #v ←MAX-VALUE(state,−∞,+∞)
         #return the action in ACTIONS(state) with value v
 
-        (value, col, row) = maxValue(self, -2, 2)
+        (value, row, col) = self.maxValue(-2, 2)
 
-        return (col, row)
+        return (row, col)
 
     def maxValue(self, alpha, beta):
         # initialize values
         maxValue = -2 
-        col = None
         row = None
+        col = None
         utility = 2
 
         # checkWin to get the current utility and determine if the game is over
@@ -169,23 +169,23 @@ class GenGameBoard:
                     (move, min_i, min_j) = self.minValue(alpha, beta)
                     if move > maxValue:
                         maxValue = move
-                        col = i
-                        row = j
+                        row = i
+                        col = j
                     self.marks[i][j] = ' '
 
                     if maxValue >= beta:
-                        return (maxValue, col, row)
+                        return (maxValue, row, col)
 
                     if maxValue > alpha:
                         alpha = maxValue
 
-        return (maxValue, col, row)
+        return (maxValue, row, col)
 
     def minValue(self,alpha, beta):
         # initialize values
         minValue = 2 
-        col = None
         row = None
+        col = None
         utility = 2
 
         # checkWin to get the current utility and determine if the game is over
@@ -206,23 +206,23 @@ class GenGameBoard:
                     (move, max_i, max_j) = self.maxValue(alpha, beta)
                     if move < minValue:
                         minValue = move
-                        col = i
-                        row = j
+                        row = i
+                        col = j
                     self.marks[i][j] = ' '
 
                     if minValue <= alpha:
-                        return (minValue, col, row)
+                        return (minValue, row, col)
 
                     if minValue < beta:
                         beta = minValue
 
-        return (minValue, col, row)
+        return (minValue, row, col)
 
 
     # Then make best move for the computer by placing the mark in the best spot
     def makeCompMove(self):
 
-        (col, row) = self.alphaBetaSearch()
+        (row, col) = self.alphaBetaSearch()
 
         self.makeMove(row, col, 'O')
         print("Computer chose: "+str(row)+","+str(col))

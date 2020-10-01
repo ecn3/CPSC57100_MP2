@@ -135,47 +135,54 @@ class GenGameBoard:
     def noMoreMoves(self):  # may need to be modified or overriden by min max
         return (self.marks!=' ').all()
 
-    # This function
     def alphaBetaSearch(self):
-        #v ←MAX-VALUE(state,−∞,+∞)
-        #return the action in ACTIONS(state) with value v
-        print("delete me")
+        (value, row, col) = self.maxValue(2,-2)
+        return(row, col)
 
     def maxValue(self,alpha, beta):
-        """ if TERMINAL-TEST(state) then return UTILITY(state) # determine if state is terminal or not, a terminal state is when the board is full, or when min or max wins it is terminal
-            v ←−∞
-            for each a in ACTIONS(state) do
-                v ←MAX(v, MIN-VALUE(RESULT(s,a),α, β))
-                if v ≥ β then return v
-                α←MAX(α, v)
-            return v
-        """
-        print("delete me")
+        utility = 2
+        value = 2
+        row = None
+        col = None
+
+        # checkWin to get the current utility and determine if the game is Terminal
+        playerWin = self.checkWin('X')
+        computerWin = self.checkWin('O')
+
+        if(playerWin == False) and (computerWin == False):
+            utility = 0
+        elif playerWin == True:
+            utility = -1
+        elif computerWin == True:
+            utility = 1
+
+        return (value,row,col)
 
     def minValue(self,alpha, beta):
-        """
-        if TERMINAL-TEST(state) then return UTILITY(state)
-            v ←+∞
-            for each a in ACTIONS(state) do
-                v ←MIN(v, MAX-VALUE(RESULT(s,a) ,α, β))
-                if v ≤ α then return v
-                β←MIN(β, v)
-            return v
-        """
-        print("delete me")
+        utility = 2
+        value = 2
+        row = None
+        col = None
 
-    def setMove(self):
-        row = 4
-        col =4
-        if self.marks[1][1]!='O':
-            (row,col) = (1,1)
-        
-        return(row, col)
+        # checkWin to get the current utility and determine if the game is Terminal
+        playerWin = self.checkWin('X')
+        computerWin = self.checkWin('O')
+
+        if(playerWin == False) and (computerWin == False):
+            utility = 0
+        elif playerWin == True:
+            utility = -1
+        elif computerWin == True:
+            utility = 1
+
+        return (value,row,col)
 
     # Then make best move for the computer by placing the mark in the best spot
     def makeCompMove(self):
-        (row,col) = self.setMove()
+        (row,col) = self.alphaBetaSearch()
         self.makeMove(row, col, 'O')
+
+        print("Computer chose: "+str(row)+","+str(col))
         
 
 # Print out the header info
