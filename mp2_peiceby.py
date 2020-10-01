@@ -139,93 +139,43 @@ class GenGameBoard:
     def alphaBetaSearch(self):
         #v ←MAX-VALUE(state,−∞,+∞)
         #return the action in ACTIONS(state) with value v
+        print("delete me")
 
-        (value, col, row) = maxValue(self, -2, 2)
-
-        return (col, row)
-
-    def maxValue(self, alpha, beta):
-        # initialize values
-        maxValue = -2 
-        col = None
-        row = None
-        utility = 2
-
-        # checkWin to get the current utility and determine if the game is over
-        playerWin = self.checkWin('X')
-        computerWin = self.checkWin('O')
-
-        if(playerWin == False) and (computerWin == False):
-            utility = 0
-        elif playerWin == True:
-            utility = -1
-        elif computerWin == True:
-            utility = 1
-
-        for i in range(0,3):
-            for j in range(0,3):
-                if self.marks[i][j] == ' ':
-                    self.marks[i][j] = 'O'
-                    (move, min_i, min_j) = self.minValue(alpha, beta)
-                    if move > maxValue:
-                        maxValue = move
-                        col = i
-                        row = j
-                    self.marks[i][j] = ' '
-
-                    if maxValue >= beta:
-                        return (maxValue, col, row)
-
-                    if maxValue > alpha:
-                        alpha = maxValue
-
-        return (maxValue, col, row)
+    def maxValue(self,alpha, beta):
+        """ if TERMINAL-TEST(state) then return UTILITY(state) # determine if state is terminal or not, a terminal state is when the board is full, or when min or max wins it is terminal
+            v ←−∞
+            for each a in ACTIONS(state) do
+                v ←MAX(v, MIN-VALUE(RESULT(s,a),α, β))
+                if v ≥ β then return v
+                α←MAX(α, v)
+            return v
+        """
+        print("delete me")
 
     def minValue(self,alpha, beta):
-        # initialize values
-        minValue = 2 
-        col = None
-        row = None
-        utility = 2
+        """
+        if TERMINAL-TEST(state) then return UTILITY(state)
+            v ←+∞
+            for each a in ACTIONS(state) do
+                v ←MIN(v, MAX-VALUE(RESULT(s,a) ,α, β))
+                if v ≤ α then return v
+                β←MIN(β, v)
+            return v
+        """
+        print("delete me")
 
-        # checkWin to get the current utility and determine if the game is over
-        playerWin = self.checkWin('X')
-        computerWin = self.checkWin('O')
-
-        if(playerWin == False) and (computerWin == False):
-            utility = 0
-        elif playerWin == True:
-            utility = -1
-        elif computerWin == True:
-            utility = 1
-
-        for i in range(0,3):
-            for j in range(0,3):
-                if self.marks[i][j] == ' ':
-                    self.marks[i][j] = 'X'
-                    (move, max_i, max_j) = self.maxValue(alpha, beta)
-                    if move < minValue:
-                        minValue = move
-                        col = i
-                        row = j
-                    self.marks[i][j] = ' '
-
-                    if minValue <= alpha:
-                        return (minValue, col, row)
-
-                    if minValue < beta:
-                        beta = minValue
-
-        return (minValue, col, row)
-
+    def setMove(self):
+        row = 4
+        col =4
+        if self.marks[1][1]!='O':
+            (row,col) = (1,1)
+        
+        return(row, col)
 
     # Then make best move for the computer by placing the mark in the best spot
     def makeCompMove(self):
-
-        (col, row) = self.alphaBetaSearch()
-
+        (row,col) = self.setMove()
         self.makeMove(row, col, 'O')
-        print("Computer chose: "+str(row)+","+str(col))
         
 
 # Print out the header info
