@@ -141,15 +141,25 @@ class GenGameBoard:
         #return mark and value
         print("delete me")
 
-    def maxValue(self,alpha, beta):
+    def maxValue(self):
+        # initialize values
+        maxValue = -2 
+        col = None
+        row = None
+        utility = 2
+
         # checkWin to get the current utility and determine if the game is over
-        """
-        playerWin = -1
-        computerWin = 1
-        noWin = 0
-        utility = above
-        """
-        maxValue = -2 # initialize maxValue
+        playerWin = self.checkWin('X')
+        computerWin = self.checkWin('O')
+
+        if(playerWin == False) and (computerWin == False):
+            utility = 0
+        elif playerWin == True:
+            utility = -1
+        elif computerWin == True:
+            utility = 1
+
+        return utility
 
         # Loop through every possible move
             # For each move set maxValue to (maxValue, minValue(self, alpha), alpha, beta)
@@ -222,6 +232,8 @@ while True:
 
     # Display the board again
     board.printBoard()
+
+    print(board.maxValue())
             
     # Check for ending condition
     # If game is over, check if player won and end the game
